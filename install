@@ -1,0 +1,58 @@
+#!/bin/bash
+
+DOTFILES_REPO="https://github.com/trosborn/dotfiles"
+
+DOTFILES=$HOME/.dotfiles
+HOMEBREW_APPS=(
+  Caskroom/cask/google-chrome
+  Caskroom/cask/iterm2
+  Caskroom/cask/vagrant
+  Caskroom/cask/virtualbox
+  Caskroom/cask/virtualbox-extension-pack
+  Caskroom/cask/vlc
+	curl
+	git
+	vim
+	wget
+	pianobar
+)
+
+if [[ $(uname) == "Darwin" ]]; then
+  # Install homebrew
+  echo "Install homebrew"
+	  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  # Install all the apps with homebrew
+	  echo "Installing apps with homebrew"
+	  brew install ${HOMEBREW_APPS[@]} --force
+else
+  # Assume debian based os for now
+  sudo add-apt-repository ppa:git-core/ppa -y
+  sudo apt-get update
+  sudo apt-get install -y git curl wget vim unzip
+fi
+
+# Install Vundle for vim
+echo "Install Vundle"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo "Install dotfiles"
+# Ensure the dotfiles directory exists
+git clone $DOTFILES_REPO $DOTFILES
+
+for conf in $(ls $DOTFILES)
+do
+  if [[ $conf == 'ssh_config' ]]; then
+    mkdir -p $HOME/.ssh
+    [ ! -e $HOME/.ssh/config ] && ln -s $DOTFILES/$conf $HOME/.ssh/config
+  elif [[ $conf == 'README.md' ]] || [[ $conf == 'install' ]]; then
+		# Skip it we don't want to create links
+	  echo "Skipped: $conf"
+  else
+    dest=$HOME/.$conf
+    echo "Linked: $dest"
+    ln -sf $DOTFILES/$conf $dest
+  fi
+done
+
+echo "Running commands in vim"
+vim +PluginInstall +qall
