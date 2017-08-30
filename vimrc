@@ -1,31 +1,26 @@
 set nocompatible
-filetype off
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'bling/vim-airline'
+Plug 'pangloss/vim-javascript'
+Plug 'w0ng/vim-hybrid'
+Plug 'Raimondi/delimitMate'
 
-" play nice with iterm2
-Bundle 'sjl/vitality.vim'
+Plug 'Valloric/YouCompleteMe'
 
-" Git stuff
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
 
-" Automatic end statements
-Bundle 'tpope/vim-endwise'
+Plug 'sjl/vitality.vim'
 
-" Syntax error reporter
-Bundle "scrooloose/syntastic"
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plug 'tpope/vim-endwise'
 
 set autowrite     " Automatically :write before running commands
 set tabstop=2
