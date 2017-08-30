@@ -22,6 +22,8 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'tpope/vim-endwise'
 
+call plug#end()
+
 set autowrite     " Automatically :write before running commands
 set tabstop=2
 set shiftwidth=2
