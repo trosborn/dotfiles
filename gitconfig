@@ -4,11 +4,9 @@
   email = trosborn@gmail.com
 
 [alias]
-  lg = log --pretty=oneline -n 20 --graph --abbrev-commit
   co = checkout
   ci = commit
   amend = commit --amend
   master = checkout master
   b = branch
-
-
+  s = status
