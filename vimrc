@@ -21,6 +21,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'tpope/vim-endwise'
+Plug 'scrooloose/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
+
+Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
@@ -38,6 +42,14 @@ set noswapfile
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set backspace=2   " Backspace deletes like most programs in insert mode
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 " Theme stuff
 set background=dark
