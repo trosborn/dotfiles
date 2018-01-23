@@ -35,6 +35,9 @@ set expandtab
 set autoindent
 set smartindent
 
+"Cursos which always stays in middle of screen
+set scrolloff=9999 
+
 set nobackup
 set nowritebackup
 set noswapfile
