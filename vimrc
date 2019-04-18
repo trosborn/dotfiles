@@ -11,8 +11,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'w0ng/vim-hybrid'
 Plug 'Raimondi/delimitMate'
 
-Plug 'Valloric/YouCompleteMe'
-
 Plug 'bling/vim-airline'
 
 Plug 'sjl/vitality.vim'
